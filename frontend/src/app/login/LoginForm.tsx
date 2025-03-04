@@ -1,19 +1,9 @@
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Grid2X2 } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SignInButton } from "@/lib/auth";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -23,10 +13,7 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-6">
-            <Button variant="default" className="w-full">
-              <Grid2X2 className="w-6 h-6" />
-              Sign in with Microsoft
-            </Button>
+            <SignInButton redirectUrl="/">Sign in with Clerk</SignInButton>
           </div>
         </CardContent>
       </Card>
