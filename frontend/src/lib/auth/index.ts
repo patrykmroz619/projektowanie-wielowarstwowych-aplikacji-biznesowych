@@ -1,4 +1,4 @@
-export { SignInButton, SignOutButton, ProtectedContent } from "./components";
+export { SignInButton, ProtectedContent } from "./components";
 
 export { AuthProvider } from "./providers";
 
