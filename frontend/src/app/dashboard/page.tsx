@@ -27,8 +27,7 @@ const UserDashboardPage = () => {
               {publicUserData?.firstName && `, ${publicUserData.firstName}!`}
             </h1>
             <p className="text-muted-foreground">
-              Twój osobisty asystent dietetyczny jest gotowy do pomocy. Co
-              chcesz dzisiaj zrobić?
+              Twój osobisty asystent dietetyczny jest gotowy do pomocy. Co chcesz dzisiaj zrobić?
             </p>
           </div>
         </section>
@@ -38,8 +37,7 @@ const UserDashboardPage = () => {
             <CardHeader className="pb-3">
               <CardTitle className="text-2xl">Wygeneruj nową dietę</CardTitle>
               <CardDescription>
-                Stwórz spersonalizowany plan żywieniowy dopasowany do Twoich
-                potrzeb i preferencji.
+                Stwórz spersonalizowany plan żywieniowy dopasowany do Twoich potrzeb i preferencji.
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-1">
@@ -62,8 +60,7 @@ const UserDashboardPage = () => {
                   <div>
                     <h3 className="font-medium">Różnorodne przepisy</h3>
                     <p className="text-sm text-muted-foreground">
-                      Otrzymaj zróżnicowane i smaczne posiłki dopasowane do
-                      Twoich potrzeb.
+                      Otrzymaj zróżnicowane i smaczne posiłki dopasowane do Twoich potrzeb.
                     </p>
                   </div>
                 </div>
@@ -71,7 +68,7 @@ const UserDashboardPage = () => {
             </CardContent>
             <CardFooter>
               <Button className="w-full" asChild>
-                <Link href="/dashboard/nowa-dieta">Wygeneruj nową dietę</Link>
+                <Link href="/dashboard/new">Wygeneruj nową dietę</Link>
               </Button>
             </CardFooter>
           </Card>
@@ -92,8 +89,7 @@ const UserDashboardPage = () => {
                   <div>
                     <h3 className="font-medium">Historia diet</h3>
                     <p className="text-sm text-muted-foreground">
-                      Przeglądaj wszystkie swoje plany żywieniowe w jednym
-                      miejscu.
+                      Przeglądaj wszystkie swoje plany żywieniowe w jednym miejscu.
                     </p>
                   </div>
                 </div>
@@ -104,8 +100,7 @@ const UserDashboardPage = () => {
                   <div>
                     <h3 className="font-medium">Analiza postępów</h3>
                     <p className="text-sm text-muted-foreground">
-                      Śledź swoje postępy i zobacz, jak Twoje nawyki żywieniowe
-                      się zmieniają.
+                      Śledź swoje postępy i zobacz, jak Twoje nawyki żywieniowe się zmieniają.
                     </p>
                   </div>
                 </div>
@@ -128,8 +123,7 @@ const UserDashboardPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Pamiętaj o nawodnieniu - wypijaj minimum 2 litry wody
-                  dziennie.
+                  Pamiętaj o nawodnieniu - wypijaj minimum 2 litry wody dziennie.
                 </p>
               </CardContent>
             </Card>
@@ -139,8 +133,7 @@ const UserDashboardPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Regularne posiłki pomagają utrzymać stabilny poziom cukru we
-                  krwi.
+                  Regularne posiłki pomagają utrzymać stabilny poziom cukru we krwi.
                 </p>
               </CardContent>
             </Card>
@@ -150,8 +143,7 @@ const UserDashboardPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Staraj się, aby warzywa stanowiły połowę każdego głównego
-                  posiłku.
+                  Staraj się, aby warzywa stanowiły połowę każdego głównego posiłku.
                 </p>
               </CardContent>
             </Card>
