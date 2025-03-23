@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CirclePlus, Home, List } from "lucide-react";
+import { CirclePlus, Home, List, User } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -27,6 +27,11 @@ const items = [
     title: "Lista diet",
     url: "/dashboard/list",
     icon: List,
+  },
+  {
+    title: "Profil",
+    url: "/dashboard/profile",
+    icon: User,
   },
 ];
 
