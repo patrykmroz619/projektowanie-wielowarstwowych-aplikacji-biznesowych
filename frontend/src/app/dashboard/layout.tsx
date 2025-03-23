@@ -14,7 +14,7 @@ const UserDashboardLayout = (props: IUserDashboardLayoutProps) => {
     <ProtectedContent fallbackPath="/login">
       <SidebarProvider defaultOpen>
         <AppSidebar />
-        <main className="p-4">
+        <main className="flex w-full p-4">
           <SidebarTrigger className="md:!hidden" />
           {children}
         </main>

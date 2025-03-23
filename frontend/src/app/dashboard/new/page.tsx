@@ -19,27 +19,39 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   age: z.coerce.number().min(1, { message: "Wiek musi być większy niż 0" }),
   gender: z.enum(["male", "female"], { message: "Proszę wybrać płeć" }),
   weight: z.coerce.number().min(1, "Waga musi być większa niż 0"),
   height: z.coerce.number().min(1, "Wzrost musi być większy niż 0"),
-  activityLevel: z.enum(["sedentary", "light", "moderate", "active", "veryActive"], {
-    message: "Proszę wybrać poziom aktywności",
-  }),
-  dietGoal: z.enum(["reduction", "maintenance", "muscleGain", "healthyEating"], {
-    message: "Proszę wybrać cel diety",
-  }),
-  dietType: z.enum(["standard", "vegetarian", "vegan", "ketogenic", "lowCarb", "highProtein"], {
-    message: "Proszę wybrać rodzaj diety",
-  }),
+  activityLevel: z.enum(
+    ["sedentary", "light", "moderate", "active", "veryActive"],
+    {
+      message: "Proszę wybrać poziom aktywności",
+    }
+  ),
+  dietGoal: z.enum(
+    ["reduction", "maintenance", "muscleGain", "healthyEating"],
+    {
+      message: "Proszę wybrać cel diety",
+    }
+  ),
+  dietType: z.enum(
+    ["standard", "vegetarian", "vegan", "ketogenic", "lowCarb", "highProtein"],
+    {
+      message: "Proszę wybrać rodzaj diety",
+    }
+  ),
   allergies: z.string().optional(),
   excludedProducts: z.string().optional(),
   favoriteProducts: z.string().optional(),
   caloricIntake: z.coerce.number().optional(),
   macroRatios: z.string().optional(),
-  mealsPerDay: z.coerce.number().min(1, "Liczba posiłków musi być większa niż 0"),
+  mealsPerDay: z.coerce
+    .number()
+    .min(1, "Liczba posiłków musi być większa niż 0"),
   recipeDifficulty: z.enum(["easy", "medium", "advanced"], {
     message: "Proszę wybrać poziom trudności",
   }),
@@ -52,10 +64,12 @@ const NewDietPage = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
+  const router = useRouter();
 
   const onSubmit = (data: FormValues) => {
     // Handle form submission logic here
     console.log(data);
+    router.push("/dashboard/list/idOfTheRecordInDB");
   };
 
   return (
@@ -63,9 +77,12 @@ const NewDietPage = () => {
       <div className="flex flex-col gap-8">
         <section>
           <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-bold tracking-tight">Stwórz nową dietę</h1>
+            <h1 className="text-3xl font-bold tracking-tight">
+              Stwórz nową dietę
+            </h1>
             <p className="text-muted-foreground">
-              Wypełnij poniższy formularz, aby stworzyć spersonalizowany plan żywieniowy.
+              Wypełnij poniższy formularz, aby stworzyć spersonalizowany plan
+              żywieniowy.
             </p>
           </div>
         </section>
@@ -94,7 +111,10 @@ const NewDietPage = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Płeć</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Wybierz płeć" />
@@ -141,7 +161,10 @@ const NewDietPage = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Poziom aktywności fizycznej</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Wybierz poziom aktywności" />
@@ -152,7 +175,9 @@ const NewDietPage = () => {
                           <SelectItem value="light">Lekko aktywny</SelectItem>
                           <SelectItem value="moderate">Umiarkowany</SelectItem>
                           <SelectItem value="active">Aktywny</SelectItem>
-                          <SelectItem value="veryActive">Bardzo aktywny</SelectItem>
+                          <SelectItem value="veryActive">
+                            Bardzo aktywny
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -165,7 +190,10 @@ const NewDietPage = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Cel diety</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Wybierz cel diety" />
@@ -173,9 +201,15 @@ const NewDietPage = () => {
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="reduction">Redukcja</SelectItem>
-                          <SelectItem value="maintenance">Utrzymanie wagi</SelectItem>
-                          <SelectItem value="muscleGain">Budowa masy mięśniowej</SelectItem>
-                          <SelectItem value="healthyEating">Zdrowe odżywianie</SelectItem>
+                          <SelectItem value="maintenance">
+                            Utrzymanie wagi
+                          </SelectItem>
+                          <SelectItem value="muscleGain">
+                            Budowa masy mięśniowej
+                          </SelectItem>
+                          <SelectItem value="healthyEating">
+                            Zdrowe odżywianie
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -192,7 +226,10 @@ const NewDietPage = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Rodzaj diety</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Wybierz rodzaj diety" />
@@ -200,11 +237,19 @@ const NewDietPage = () => {
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="standard">Standardowa</SelectItem>
-                          <SelectItem value="vegetarian">Wegetariańska</SelectItem>
+                          <SelectItem value="vegetarian">
+                            Wegetariańska
+                          </SelectItem>
                           <SelectItem value="vegan">Wegańska</SelectItem>
-                          <SelectItem value="ketogenic">Ketogeniczna</SelectItem>
-                          <SelectItem value="lowCarb">Niskowęglowodanowa</SelectItem>
-                          <SelectItem value="highProtein">Wysokobiałkowa</SelectItem>
+                          <SelectItem value="ketogenic">
+                            Ketogeniczna
+                          </SelectItem>
+                          <SelectItem value="lowCarb">
+                            Niskowęglowodanowa
+                          </SelectItem>
+                          <SelectItem value="highProtein">
+                            Wysokobiałkowa
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -253,7 +298,9 @@ const NewDietPage = () => {
               </div>
 
               <div className="space-y-4">
-                <h2 className="text-xl font-bold">Szczegóły kaloryczne i makroskładniki</h2>
+                <h2 className="text-xl font-bold">
+                  Szczegóły kaloryczne i makroskładniki
+                </h2>
                 <FormField
                   control={form.control}
                   name="caloricIntake"
@@ -272,7 +319,9 @@ const NewDietPage = () => {
                   name="macroRatios"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Preferowane proporcje makroskładników</FormLabel>
+                      <FormLabel>
+                        Preferowane proporcje makroskładników
+                      </FormLabel>
                       <FormControl>
                         <Input type="text" {...field} />
                       </FormControl>
@@ -303,7 +352,10 @@ const NewDietPage = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Poziom trudności przepisów</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Wybierz poziom trudności" />
