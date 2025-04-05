@@ -71,7 +71,7 @@ export function NavUser() {
               }
             >
               <LogOut />
-              Log out
+              Wyloguj się
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
