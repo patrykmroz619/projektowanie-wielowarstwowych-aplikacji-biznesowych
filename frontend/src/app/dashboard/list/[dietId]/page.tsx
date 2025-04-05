@@ -148,7 +148,7 @@ const sampleDiet = {
 };
 
 export default function DietResultPage() {
-  const [diet, setDiet] = useState(sampleDiet);
+  const [diet] = useState(sampleDiet);
 
   // TODO integrate it with backend
   // useEffect(() => {
@@ -175,9 +175,7 @@ export default function DietResultPage() {
       <div className="flex flex-col gap-8">
         <section className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-bold tracking-tight">
-              {sampleDiet.title}
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight">{sampleDiet.title}</h1>
             <p className="text-muted-foreground">
               Plan żywieniowy dostosowany do Twoich potrzeb i preferencji.
             </p>
@@ -202,68 +200,35 @@ export default function DietResultPage() {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-5 print:grid-cols-5 gap-4">
                 <div className="flex flex-col items-center p-4 bg-muted rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Kalorie
-                  </span>
-                  <span className="text-2xl font-bold">
-                    {diet.summary.calories}
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">Kalorie</span>
+                  <span className="text-2xl font-bold">{diet.summary.calories}</span>
+                  <span className="text-xs text-muted-foreground">kcal/dzień</span>
+                </div>
+                <div className="flex flex-col items-center p-4 bg-muted rounded-lg">
+                  <span className="text-sm font-medium text-muted-foreground">Białko</span>
+                  <span className="text-2xl font-bold">{diet.summary.protein}g</span>
                   <span className="text-xs text-muted-foreground">
-                    kcal/dzień
+                    {Math.round(((diet.summary.protein * 4) / diet.summary.calories) * 100)}%
                   </span>
                 </div>
                 <div className="flex flex-col items-center p-4 bg-muted rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Białko
-                  </span>
-                  <span className="text-2xl font-bold">
-                    {diet.summary.protein}g
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">Węglowodany</span>
+                  <span className="text-2xl font-bold">{diet.summary.carbs}g</span>
                   <span className="text-xs text-muted-foreground">
-                    {Math.round(
-                      ((diet.summary.protein * 4) / diet.summary.calories) * 100
-                    )}
-                    %
+                    {Math.round(((diet.summary.carbs * 4) / diet.summary.calories) * 100)}%
                   </span>
                 </div>
                 <div className="flex flex-col items-center p-4 bg-muted rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Węglowodany
-                  </span>
-                  <span className="text-2xl font-bold">
-                    {diet.summary.carbs}g
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">Tłuszcze</span>
+                  <span className="text-2xl font-bold">{diet.summary.fat}g</span>
                   <span className="text-xs text-muted-foreground">
-                    {Math.round(
-                      ((diet.summary.carbs * 4) / diet.summary.calories) * 100
-                    )}
-                    %
+                    {Math.round(((diet.summary.fat * 9) / diet.summary.calories) * 100)}%
                   </span>
                 </div>
                 <div className="flex flex-col items-center p-4 bg-muted rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Tłuszcze
-                  </span>
-                  <span className="text-2xl font-bold">
-                    {diet.summary.fat}g
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {Math.round(
-                      ((diet.summary.fat * 9) / diet.summary.calories) * 100
-                    )}
-                    %
-                  </span>
-                </div>
-                <div className="flex flex-col items-center p-4 bg-muted rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Posiłki
-                  </span>
-                  <span className="text-2xl font-bold">
-                    {diet.summary.meals}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    dziennie
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">Posiłki</span>
+                  <span className="text-2xl font-bold">{diet.summary.meals}</span>
+                  <span className="text-xs text-muted-foreground">dziennie</span>
                 </div>
               </div>
             </CardContent>
@@ -278,9 +243,7 @@ export default function DietResultPage() {
                   <div className="flex justify-between items-center">
                     <div>
                       <CardTitle className="text-xl">{meal.name}</CardTitle>
-                      <p className="text-sm text-muted-foreground">
-                        {meal.time}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{meal.time}</p>
                     </div>
                     <div className="flex gap-2">
                       <Badge variant="outline">{meal.calories} kcal</Badge>
@@ -312,9 +275,7 @@ export default function DietResultPage() {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-medium mb-2">
-                        Sposób przygotowania:
-                      </h4>
+                      <h4 className="font-medium mb-2">Sposób przygotowania:</h4>
                       <p className="text-sm">{meal.recipe.instructions}</p>
                     </div>
                   </div>

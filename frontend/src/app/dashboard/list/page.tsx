@@ -2,21 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -132,10 +120,8 @@ export default function DietsListPage() {
 
   // Filtrowanie diet na podstawie wyszukiwania i filtrów
   const filteredDiets = diets.filter((diet) => {
-    const matchesGoal =
-      !filterGoal || filterGoal === "all" || diet.goal === filterGoal;
-    const matchesType =
-      !filterType || filterType === "all" || diet.type === filterType;
+    const matchesGoal = !filterGoal || filterGoal === "all" || diet.goal === filterGoal;
+    const matchesType = !filterType || filterType === "all" || diet.type === filterType;
     return matchesGoal && matchesType;
   });
 
@@ -170,9 +156,7 @@ export default function DietsListPage() {
               <div className="flex items-center">
                 <Filter className="mr-2 h-4 w-4" />
                 <span>
-                  {filterGoal
-                    ? goalLabels[filterGoal as keyof typeof goalLabels]
-                    : "Cel diety"}
+                  {filterGoal ? goalLabels[filterGoal as keyof typeof goalLabels] : "Cel diety"}
                 </span>
               </div>
             </SelectTrigger>
@@ -252,18 +236,14 @@ export default function DietsListPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-2 mb-4">
                     <div className="flex flex-col items-center p-3 bg-muted rounded-lg">
-                      <span className="text-xs text-muted-foreground">
-                        Kalorie
-                      </span>
+                      <span className="text-xs text-muted-foreground">Kalorie</span>
                       <span className="text-lg font-bold">
                         {diet.calories}
                         <span className="text-xs">kcal</span>
                       </span>
                     </div>
                     <div className="flex flex-col items-center p-3 bg-muted rounded-lg">
-                      <span className="text-xs text-muted-foreground">
-                        Posiłki
-                      </span>
+                      <span className="text-xs text-muted-foreground">Posiłki</span>
                       <span className="text-lg font-bold">{diet.meals}</span>
                     </div>
                   </div>
