@@ -61,8 +61,8 @@ export default function WelcomePage() {
         </div>
       </header>
       <main className="flex-1">
-        <section className="px-6 py-12 md:px-12 md:py-24 lg:px-16 lg:py-32">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <section className="flex justify-center px-6 py-12 md:px-12 md:py-24 lg:px-16 lg:py-32">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 max-w-[1500px]">
             <div className="flex flex-col justify-center space-y-8">
               <div className="space-y-6">
                 <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
@@ -303,7 +303,7 @@ export default function WelcomePage() {
         </section>
 
         <section className="py-12 md:py-24 lg:py-32">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+          <div className="mx-auto flex max-w-[69rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               Rozpocznij swoją podróż już dziś
             </h2>
