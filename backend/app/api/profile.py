@@ -3,7 +3,7 @@ from app.models.profile import UserProfile
 
 router = APIRouter()
 
-# Simulated user database (in-memory)
+# Simulated user data
 user_data = UserProfile(name="Alice", age=28, goal="Gain muscle")
 
 @router.get("/", response_model=UserProfile)

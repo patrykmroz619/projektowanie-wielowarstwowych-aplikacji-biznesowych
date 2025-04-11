@@ -4,7 +4,7 @@ from typing import List
 
 router = APIRouter()
 
-# In-memory "diet list"
+# In-memory 
 diet_list: List[DietPlan] = []
 
 @router.post("/new")
