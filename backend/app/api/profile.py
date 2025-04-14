@@ -3,15 +3,23 @@ from app.models.profile import UserProfile
 
 router = APIRouter()
 
-# Simulated user data
-user_data = UserProfile(name="Alice", age=28, goal="Gain muscle")
+# FAKE DB – trzymanie profili w pamięci
+user_profiles: dict[str, UserProfile] = {}
 
-@router.get("/", response_model=UserProfile)
-def get_profile():
-    return user_data
+@router.get("/{user_id}", response_model=UserProfile)
+def get_profile(user_id: str):
+    # Jeśli brak profilu, zwróć domyślny
+    if user_id not in user_profiles:
+        user_profiles[user_id] = UserProfile(
+            age=0,
+            gender="male",
+            weight=0.0,
+            height=0.0,
+            activityLevel="sedentary"
+        )
+    return user_profiles[user_id]
 
-@router.post("/", response_model=UserProfile)
-def update_profile(updated: UserProfile):
-    global user_data
-    user_data = updated
-    return user_data
+@router.put("/{user_id}", response_model=UserProfile)
+def update_profile(user_id: str, updated: UserProfile):
+    user_profiles[user_id] = updated
+    return updated
