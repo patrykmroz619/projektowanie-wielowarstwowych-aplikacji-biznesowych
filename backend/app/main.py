@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from app.api import profile, diet
+from database.database import Base, engine
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

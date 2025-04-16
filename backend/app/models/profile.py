@@ -18,3 +18,4 @@ class UserProfile(BaseModel):
     weight: float
     height: float
     activityLevel: ActivityLevel
+    

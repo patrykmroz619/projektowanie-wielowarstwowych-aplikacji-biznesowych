@@ -30,6 +30,7 @@ services:
       command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
       volumes:
         - ./backend/app:/app/app
+        - ./database:/app/database
       ports:
         - 8000:8000
       restart: always
@@ -37,6 +38,23 @@ services:
         - my_network
 
   # Add more containers below (nginx, postgres, etc.)
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fastapi_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+volumes:
+  postgres_data:
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
