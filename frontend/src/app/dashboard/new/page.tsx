@@ -20,6 +20,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const formSchema = z.object({
   age: z.coerce.number().min(1, { message: "Wiek musi być większy niż 0" }),
@@ -61,16 +62,61 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const NewDietPage = () => {
-  const form = useForm({
+  const { user } = useUser();
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      age: 0,
+      weight: 0,
+      height: 0,
+      mealsPerDay: 3,
+      caloricIntake: 2000,
+      gender: "male",
+      activityLevel: "moderate",
+      dietGoal: "maintenance",
+      dietType: "standard",
+      recipeDifficulty: "easy",
+    },
   });
+
   const router = useRouter();
 
-  const onSubmit = (data: FormValues) => {
-    // Handle form submission logic here
-    console.log(data);
-    router.push("/dashboard/list/idOfTheRecordInDB");
+  const onSubmit = async (data: FormValues) => {
+    if (!user || !user.id) {
+      console.error("Brak użytkownika");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/diet/new`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: user.id,
+            dietGoal: data.dietGoal,
+            dietType: data.dietType,
+            caloricIntake: data.caloricIntake,
+            mealsPerDay: data.mealsPerDay,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Błąd zapisu diety");
+      }
+
+      const result = await response.json();
+      router.push(`/dashboard/list/${result.id}`);
+    } catch (error) {
+      console.error("Nie udało się zapisać diety:", error);
+    }
   };
+
+
 
   return (
     <main className="flex-1 container py-8 md:py-12">
@@ -274,7 +320,7 @@ const NewDietPage = () => {
                   name="excludedProducts"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Produkty do wykluczenia</FormLabel>
+                      <FormLabel>rodukty do wykluczenia</FormLabel>
                       <FormControl>
                         <Input type="text" {...field} />
                       </FormControl>

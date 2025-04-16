@@ -1,9 +1,24 @@
 from pydantic import BaseModel
-from typing import List
-from database.database import SessionLocal
-from database.models.profile import UserProfileDB
+from typing import Optional
+from enum import Enum
 
-class DietPlan(BaseModel):
-    name: str
-    description: str
-    meals: List[str]
+class DietGoal(str, Enum):
+    reduction = "reduction"
+    maintenance = "maintenance"
+    muscleGain = "muscleGain"
+    healthyEating = "healthyEating"
+
+class DietType(str, Enum):
+    standard = "standard"
+    vegetarian = "vegetarian"
+    vegan = "vegan"
+    ketogenic = "ketogenic"
+    lowCarb = "lowCarb"
+    highProtein = "highProtein"
+
+class DietRequest(BaseModel):
+    dietGoal: DietGoal
+    dietType: DietType
+    caloricIntake: Optional[float] = None
+    mealsPerDay: int
+    userId: str  # przesyłany z frontu
