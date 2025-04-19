@@ -1,9 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -22,42 +18,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { profileSchema, TProfileSchema } from "@/lib/profile/schema/profileSchema";
-import { saveProfileForLoggedUserAction } from "@/lib/profile/actions/saveProfileForLoggedUserAction";
-
-const defaultFormValues: TProfileSchema = {
-  age: 0,
-  gender: "male",
-  weight: 0,
-  height: 0,
-  activityLevel: "sedentary",
-};
+import { TProfileSchema } from "@/lib/profile/schema/profileSchema";
+import { useProfileForm } from "./ProfileForm.hook";
 
 interface IProfileFormProps {
   userProfile: TProfileSchema | null;
 }
 
-const ProfileForm = (props: IProfileFormProps) => {
+export const ProfileForm = (props: IProfileFormProps) => {
   const { userProfile } = props;
 
-  const form = useForm<TProfileSchema>({
-    resolver: zodResolver(profileSchema),
-    defaultValues: userProfile ?? defaultFormValues,
-  });
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onSubmit = async (profile: TProfileSchema) => {
-    try {
-      setIsLoading(true);
-      await saveProfileForLoggedUserAction({ profile });
-    } catch (error) {
-      // TODO: Add toast notifications
-      console.error("Failed to save profile:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { form, isLoading, onSubmit } = useProfileForm(userProfile);
 
   return (
     <Form {...form}>
@@ -156,5 +127,3 @@ const ProfileForm = (props: IProfileFormProps) => {
     </Form>
   );
 };
-
-export default ProfileForm;
