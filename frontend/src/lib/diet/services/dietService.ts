@@ -6,6 +6,7 @@ interface CreateDietRequest {
   dietType: string;
   caloricIntake?: number;
   mealsPerDay: number;
+  userId: string;
   // Other relevant fields from the form
 }
 
@@ -28,9 +29,10 @@ export const dietService = {
       dietType: formData.dietType,
       caloricIntake: formData.caloricIntake,
       mealsPerDay: formData.mealsPerDay,
+      userId,
     };
 
-    const response = await dietApi.post(`/diet/${userId}/new`, requestData);
+    const response = await dietApi.post(`/diet/new`, requestData);
 
     if (!response.data) {
       throw new Error("Failed to create diet");
