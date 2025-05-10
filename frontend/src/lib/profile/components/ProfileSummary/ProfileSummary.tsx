@@ -1,7 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
 import { getLoggedUserProfileAction } from "../../actions/getLoggedUserProfileAction";
+import { getAge } from "@/lib/utils";
 
 const activityLevelLabels: Record<string, string> = {
   sedentary: "Siedzący",
@@ -27,8 +34,8 @@ export async function ProfileSummary() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            Nie znaleziono profilu. Utwórz swój profil, aby móc korzystać z pełni możliwości
-            aplikacji.
+            Nie znaleziono profilu. Utwórz swój profil, aby móc korzystać z
+            pełni możliwości aplikacji.
           </p>
         </CardContent>
         <CardFooter>
@@ -49,7 +56,7 @@ export async function ProfileSummary() {
         <div className="grid grid-cols-2 gap-2">
           <div>
             <p className="text-sm font-medium text-muted-foreground">Wiek</p>
-            <p>{profile.age} lat</p>
+            <p>{getAge(profile.dob)} lat</p>
           </div>
           <div>
             <p className="text-sm font-medium text-muted-foreground">Płeć</p>
@@ -64,8 +71,13 @@ export async function ProfileSummary() {
             <p>{profile.height} cm</p>
           </div>
           <div className="col-span-2">
-            <p className="text-sm font-medium text-muted-foreground">Poziom aktywności</p>
-            <p>{activityLevelLabels[profile.activityLevel] || profile.activityLevel}</p>
+            <p className="text-sm font-medium text-muted-foreground">
+              Poziom aktywności
+            </p>
+            <p>
+              {activityLevelLabels[profile.activityLevel] ||
+                profile.activityLevel}
+            </p>
           </div>
         </div>
       </CardContent>

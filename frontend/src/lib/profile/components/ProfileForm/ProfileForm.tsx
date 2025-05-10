@@ -36,12 +36,12 @@ export const ProfileForm = (props: IProfileFormProps) => {
         <div className="space-y-4">
           <FormField
             control={form.control}
-            name="age"
+            name="dob"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Wiek</FormLabel>
+                <FormLabel>Data urodzenia</FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <Input type="date" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -53,7 +53,10 @@ export const ProfileForm = (props: IProfileFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Płeć</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Wybierz płeć" />
@@ -100,7 +103,10 @@ export const ProfileForm = (props: IProfileFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Poziom aktywności fizycznej</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Wybierz poziom aktywności" />

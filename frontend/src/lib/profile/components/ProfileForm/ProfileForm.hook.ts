@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 
 const defaultFormValues: TProfileSchema = {
-  age: 0,
+  dob: "",
   gender: "male",
   weight: 0,
   height: 0,
@@ -24,6 +24,7 @@ export const useProfileForm = (userProfile: TProfileSchema | null) => {
   const onSubmit = async (profile: TProfileSchema) => {
     try {
       setIsLoading(true);
+      console.log("++ profile", profile);
       await saveProfileForLoggedUserAction({ profile });
       toast.success("Profil został pomyślnie zapisany.");
     } catch (error) {
