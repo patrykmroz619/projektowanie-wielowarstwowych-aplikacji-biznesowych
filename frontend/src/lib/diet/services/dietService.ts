@@ -41,3 +41,8 @@ export const dietService = {
     return response.data;
   },
 };
+
+const getDietList = async (userId: string) => {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/diet/list/${userId}`);
+  return response.data;
+};

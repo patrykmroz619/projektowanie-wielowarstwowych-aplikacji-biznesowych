@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Float, Enum
+from sqlalchemy import Column, String, Integer, Float, Enum, Date
 from database.database import Base
 import enum
 
@@ -17,7 +17,7 @@ class UserProfileDB(Base):
     __tablename__ = "user_profiles"
 
     user_id = Column(String, primary_key=True, index=True)
-    age = Column(Integer)
+    dob = Column(Date)
     gender = Column(Enum(GenderEnum))
     weight = Column(Float)
     height = Column(Float)

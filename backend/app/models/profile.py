@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from enum import Enum
+from datetime import date
 
 class Gender(str, Enum):
     male = "male"
@@ -13,7 +14,7 @@ class ActivityLevel(str, Enum):
     veryActive = "veryActive"
 
 class UserProfile(BaseModel):
-    age: int
+    dob: date
     gender: Gender
     weight: float
     height: float
