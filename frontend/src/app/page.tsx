@@ -1,9 +1,23 @@
 "use client";
 
+import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ThemeSwitcher } from "@/lib/themes";
-import { Apple, Check, ChevronRight, Salad, Utensils, Weight } from "lucide-react";
+import {
+  Apple,
+  Check,
+  ChevronRight,
+  Salad,
+  Utensils,
+  Weight,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,13 +27,7 @@ export default function WelcomePage() {
       <header className="sticky px-4 top-0 z-40 border-b bg-background/95 backdrop-blur">
         <div className="flex h-16 items-center justify-between py-4">
           <div className="flex items-center gap-2 font-bold">
-            <Image
-              src="/logo.png"
-              width={300}
-              height={100}
-              alt="diety ai"
-              className="w-40 saturate-0"
-            />
+            <Logo className="w-40 h-auto" />
           </div>
           <nav className="hidden md:flex gap-6">
             <Link
@@ -58,8 +66,9 @@ export default function WelcomePage() {
                   Spersonalizowane diety dopasowane do Twoich potrzeb
                 </h1>
                 <p className="text-lg text-muted-foreground md:text-xl">
-                  Diety AI tworzy plany żywieniowe idealnie dopasowane do Twojego stylu życia, celów
-                  i preferencji. Osiągnij swoje cele zdrowotne z pomocą sztucznej inteligencji.
+                  Diety AI tworzy plany żywieniowe idealnie dopasowane do
+                  Twojego stylu życia, celów i preferencji. Osiągnij swoje cele
+                  zdrowotne z pomocą sztucznej inteligencji.
                 </p>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row">
@@ -107,9 +116,9 @@ export default function WelcomePage() {
               Dlaczego warto wybrać Diety AI?
             </h2>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              Nasza aplikacja wykorzystuje zaawansowane algorytmy sztucznej inteligencji, aby
-              tworzyć spersonalizowane plany żywieniowe dostosowane do Twoich indywidualnych
-              potrzeb.
+              Nasza aplikacja wykorzystuje zaawansowane algorytmy sztucznej
+              inteligencji, aby tworzyć spersonalizowane plany żywieniowe
+              dostosowane do Twoich indywidualnych potrzeb.
             </p>
           </div>
           <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:max-w-5xl lg:gap-8 mt-12">
@@ -120,8 +129,8 @@ export default function WelcomePage() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Otrzymaj plan żywieniowy dopasowany do Twoich preferencji, alergii i celów
-                  zdrowotnych.
+                  Otrzymaj plan żywieniowy dopasowany do Twoich preferencji,
+                  alergii i celów zdrowotnych.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -132,7 +141,8 @@ export default function WelcomePage() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Odkryj setki smacznych i zdrowych przepisów, które pomogą Ci osiągnąć Twoje cele.
+                  Odkryj setki smacznych i zdrowych przepisów, które pomogą Ci
+                  osiągnąć Twoje cele.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -143,21 +153,25 @@ export default function WelcomePage() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Monitoruj swoje postępy i otrzymuj regularne aktualizacje planu w oparciu o Twoje
-                  wyniki.
+                  Monitoruj swoje postępy i otrzymuj regularne aktualizacje
+                  planu w oparciu o Twoje wyniki.
                 </CardDescription>
               </CardContent>
             </Card>
           </div>
         </section>
 
-        <section id="jak-to-dziala" className="px-6 py-12 md:px-12 md:py-24 lg:px-16 lg:py-32">
+        <section
+          id="jak-to-dziala"
+          className="px-6 py-12 md:px-12 md:py-24 lg:px-16 lg:py-32"
+        >
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               Jak działa Diety AI?
             </h2>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              Prosty proces w 4 krokach, który pomoże Ci rozpocząć zdrowszą dietę już dziś.
+              Prosty proces w 4 krokach, który pomoże Ci rozpocząć zdrowszą
+              dietę już dziś.
             </p>
           </div>
           <div className="mx-auto grid max-w-5xl items-start gap-6 py-12 lg:grid-cols-4 lg:gap-12">
@@ -167,7 +181,8 @@ export default function WelcomePage() {
               </div>
               <h3 className="text-xl font-bold">Uzupełnij profil</h3>
               <p className="text-muted-foreground">
-                Podaj swoje dane, preferencje żywieniowe, alergie i cele zdrowotne.
+                Podaj swoje dane, preferencje żywieniowe, alergie i cele
+                zdrowotne.
               </p>
             </div>
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -176,7 +191,8 @@ export default function WelcomePage() {
               </div>
               <h3 className="text-xl font-bold">Otrzymaj plan</h3>
               <p className="text-muted-foreground">
-                AI generuje spersonalizowany plan żywieniowy dostosowany do Twoich potrzeb.
+                AI generuje spersonalizowany plan żywieniowy dostosowany do
+                Twoich potrzeb.
               </p>
             </div>
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -185,7 +201,8 @@ export default function WelcomePage() {
               </div>
               <h3 className="text-xl font-bold">Śledź postępy</h3>
               <p className="text-muted-foreground">
-                Monitoruj swoje postępy i otrzymuj wskazówki, jak poprawić wyniki.
+                Monitoruj swoje postępy i otrzymuj wskazówki, jak poprawić
+                wyniki.
               </p>
             </div>
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -194,20 +211,24 @@ export default function WelcomePage() {
               </div>
               <h3 className="text-xl font-bold">Osiągaj cele</h3>
               <p className="text-muted-foreground">
-                Ciesz się rezultatami i kontynuuj swoją podróż ku zdrowszemu życiu.
+                Ciesz się rezultatami i kontynuuj swoją podróż ku zdrowszemu
+                życiu.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="opinie" className="px-6 py-12 md:px-12 md:py-24 lg:px-16 lg:py-32 bg-muted/50">
+        <section
+          id="opinie"
+          className="px-6 py-12 md:px-12 md:py-24 lg:px-16 lg:py-32 bg-muted/50"
+        >
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               Co mówią nasi użytkownicy
             </h2>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              Dołącz do tysięcy zadowolonych użytkowników, którzy zmienili swoje nawyki żywieniowe
-              dzięki Diety AI.
+              Dołącz do tysięcy zadowolonych użytkowników, którzy zmienili swoje
+              nawyki żywieniowe dzięki Diety AI.
             </p>
           </div>
           <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-3">
@@ -219,14 +240,17 @@ export default function WelcomePage() {
                   </div>
                   <div>
                     <CardTitle>Anna Kowalska</CardTitle>
-                    <CardDescription>Schudła 10 kg w 3 miesiące</CardDescription>
+                    <CardDescription>
+                      Schudła 10 kg w 3 miesiące
+                    </CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  &quot;Diety AI całkowicie zmieniło moje podejście do odżywiania. Plany są łatwe do
-                  przestrzegania, a przepisy pyszne. Polecam każdemu!&quot;
+                  &quot;Diety AI całkowicie zmieniło moje podejście do
+                  odżywiania. Plany są łatwe do przestrzegania, a przepisy
+                  pyszne. Polecam każdemu!&quot;
                 </p>
               </CardContent>
             </Card>
@@ -244,8 +268,9 @@ export default function WelcomePage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  &quot;Jako sportowiec, potrzebowałem diety, która wspierałaby moje treningi. Diety
-                  AI idealnie dopasowało plan do moich potrzeb energetycznych.&quot;
+                  &quot;Jako sportowiec, potrzebowałem diety, która wspierałaby
+                  moje treningi. Diety AI idealnie dopasowało plan do moich
+                  potrzeb energetycznych.&quot;
                 </p>
               </CardContent>
             </Card>
@@ -257,14 +282,17 @@ export default function WelcomePage() {
                   </div>
                   <div>
                     <CardTitle>Katarzyna Wiśniewska</CardTitle>
-                    <CardDescription>Pokonała nietolerancje pokarmowe</CardDescription>
+                    <CardDescription>
+                      Pokonała nietolerancje pokarmowe
+                    </CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  &quot;Mam wiele nietolerancji pokarmowych, co utrudniało mi zdrowe odżywianie.
-                  Diety AI stworzyło plan, który uwzględnia wszystkie moje ograniczenia.&quot;
+                  &quot;Mam wiele nietolerancji pokarmowych, co utrudniało mi
+                  zdrowe odżywianie. Diety AI stworzyło plan, który uwzględnia
+                  wszystkie moje ograniczenia.&quot;
                 </p>
               </CardContent>
             </Card>
@@ -277,8 +305,8 @@ export default function WelcomePage() {
               Rozpocznij swoją podróż już dziś
             </h2>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              Dołącz do tysięcy osób, które zmieniły swoje życie dzięki spersonalizowanym planom
-              żywieniowym Diety AI.
+              Dołącz do tysięcy osób, które zmieniły swoje życie dzięki
+              spersonalizowanym planom żywieniowym Diety AI.
             </p>
             <Button size="lg" className="mt-6" asChild>
               <Link href="/login">
@@ -300,19 +328,25 @@ export default function WelcomePage() {
               <span>Diety AI</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Diety AI to innowacyjna aplikacja wykorzystująca sztuczną inteligencję do tworzenia
-              spersonalizowanych planów żywieniowych dostosowanych do indywidualnych potrzeb
-              użytkowników.
+              Diety AI to innowacyjna aplikacja wykorzystująca sztuczną
+              inteligencję do tworzenia spersonalizowanych planów żywieniowych
+              dostosowanych do indywidualnych potrzeb użytkowników.
             </p>
           </div>
           <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-3">
             <div className="flex flex-col gap-2">
               <h3 className="text-lg font-medium">Produkt</h3>
               <nav className="flex flex-col gap-2">
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   Funkcje
                 </Link>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   FAQ
                 </Link>
               </nav>
@@ -320,13 +354,22 @@ export default function WelcomePage() {
             <div className="flex flex-col gap-2">
               <h3 className="text-lg font-medium">Firma</h3>
               <nav className="flex flex-col gap-2">
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   O nas
                 </Link>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   Blog
                 </Link>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   Kariera
                 </Link>
               </nav>
@@ -334,13 +377,22 @@ export default function WelcomePage() {
             <div className="flex flex-col gap-2">
               <h3 className="text-lg font-medium">Pomoc</h3>
               <nav className="flex flex-col gap-2">
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   Kontakt
                 </Link>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   Wsparcie
                 </Link>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   Polityka prywatności
                 </Link>
               </nav>
@@ -349,16 +401,26 @@ export default function WelcomePage() {
         </div>
         <div className="flex flex-col gap-4 border-t py-6 sm:flex-row sm:items-center">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Diety AI. Wszelkie prawa zastrzeżone.
+            &copy; {new Date().getFullYear()} Diety AI. Wszelkie prawa
+            zastrzeżone.
           </p>
           <div className="flex gap-4 sm:ml-auto">
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link
+              href="#"
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
               Polityka prywatności
             </Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link
+              href="#"
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
               Warunki korzystania
             </Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link
+              href="#"
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
               Polityka cookies
             </Link>
           </div>

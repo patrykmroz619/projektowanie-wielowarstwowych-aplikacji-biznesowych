@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { CirclePlus, Home, List, User } from "lucide-react";
 import {
   Sidebar,
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { NavUser } from "./nav-user";
 import { ThemeSwitcher } from "@/lib/themes";
+import { Logo } from "./logo";
 
 // Menu items.
 const items = [
@@ -42,13 +42,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <div className="flex justify-between items-center">
-            <Image
-              src="/logo.png"
-              width={300}
-              height={100}
-              alt="diety ai"
-              className="w-40 flex pr-6 py-4 saturate-0"
-            />
+            <Logo className="w-40 h-auto flex pr-6 py-4 " />
             <ThemeSwitcher />
           </div>
           <SidebarGroupContent>
