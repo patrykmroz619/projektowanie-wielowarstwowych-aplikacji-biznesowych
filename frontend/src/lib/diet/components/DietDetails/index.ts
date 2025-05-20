@@ -1,0 +1,1 @@
+export { DietDetails } from "./DietDetails";
