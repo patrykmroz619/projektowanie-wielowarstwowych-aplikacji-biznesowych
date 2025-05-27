@@ -1,18 +1,9 @@
 import axios from "axios";
 import { DietFormValues } from "../schema/dietSchema";
-
-interface CreateDietRequest {
-  dietGoal: string;
-  dietType: string;
-  caloricIntake?: number;
-  mealsPerDay: number;
-  userId: string;
-  // Other relevant fields from the form
-}
+import { Diet } from "../types/diet.type";
 
 interface CreateDietResponse {
   id: string;
-  // Add other response properties as needed
 }
 
 const dietApi = axios.create({
@@ -20,19 +11,11 @@ const dietApi = axios.create({
 });
 
 export const dietService = {
-  /**
-   * Creates a new diet plan based on the provided data
-   */
   createDiet: async (userId: string, formData: DietFormValues): Promise<CreateDietResponse> => {
-    const requestData: CreateDietRequest = {
-      dietGoal: formData.dietGoal,
-      dietType: formData.dietType,
-      caloricIntake: formData.caloricIntake,
-      mealsPerDay: formData.mealsPerDay,
+    const response = await dietApi.post(`/diet/new`, {
       userId,
-    };
-
-    const response = await dietApi.post(`/diet/new`, requestData);
+      ...formData,
+    });
 
     if (!response.data) {
       throw new Error("Failed to create diet");
@@ -40,9 +23,12 @@ export const dietService = {
 
     return response.data;
   },
-};
-
-const getDietList = async (userId: string) => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/diet/list/${userId}`);
-  return response.data;
+  getDiet: async (dietId: string) => {
+    const response = await dietApi.get<{ data: Diet }>(`/diet/detail/${dietId}`);
+    return response.data.data;
+  },
+  getDietList: async (userId: string) => {
+    const response = await dietApi.get<Diet[]>(`/diet/list/${userId}`);
+    return response.data;
+  },
 };

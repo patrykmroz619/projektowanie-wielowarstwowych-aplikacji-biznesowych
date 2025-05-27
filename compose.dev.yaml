@@ -9,7 +9,7 @@ services:
     environment:
       ENV_VARIABLE: ${ENV_VARIABLE}
       NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
-      NEXT_PUBLIC_API_URL: http://backend:8000
+      BACKEND_URL: http://backend:8000
 
     # Set environment variables based on the .env file
     env_file:
@@ -24,18 +24,18 @@ services:
       - my_network
 
   backend:
-      container_name: fastapi-backend
-      build:
-        context: ./backend
-      command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-      volumes:
-        - ./backend/app:/app/app
-        - ./database:/app/database
-      ports:
-        - 8000:8000
-      restart: always
-      networks:
-        - my_network
+    container_name: fastapi-backend
+    build:
+      context: ./backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend/app:/app/app
+      - ./database:/app/database
+    ports:
+      - 8000:8000
+    restart: always
+    networks:
+      - my_network
 
   # Add more containers below (nginx, postgres, etc.)
   postgres:
