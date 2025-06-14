@@ -33,7 +33,10 @@ export function DietForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Cel diety</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Wybierz cel diety" />
@@ -42,8 +45,12 @@ export function DietForm() {
                   <SelectContent>
                     <SelectItem value="reduction">Redukcja</SelectItem>
                     <SelectItem value="maintenance">Utrzymanie wagi</SelectItem>
-                    <SelectItem value="muscleGain">Budowa masy mięśniowej</SelectItem>
-                    <SelectItem value="healthyEating">Zdrowe odżywianie</SelectItem>
+                    <SelectItem value="muscleGain">
+                      Budowa masy mięśniowej
+                    </SelectItem>
+                    <SelectItem value="healthyEating">
+                      Zdrowe odżywianie
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -60,7 +67,10 @@ export function DietForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Rodzaj diety</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Wybierz rodzaj diety" />
@@ -71,7 +81,6 @@ export function DietForm() {
                     <SelectItem value="vegetarian">Wegetariańska</SelectItem>
                     <SelectItem value="vegan">Wegańska</SelectItem>
                     <SelectItem value="ketogenic">Ketogeniczna</SelectItem>
-                    <SelectItem value="lowCarb">Niskowęglowodanowa</SelectItem>
                     <SelectItem value="highProtein">Wysokobiałkowa</SelectItem>
                   </SelectContent>
                 </Select>
@@ -121,7 +130,9 @@ export function DietForm() {
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-xl font-bold">Szczegóły kaloryczne i makroskładniki</h2>
+          <h2 className="text-xl font-bold">
+            Szczegóły kaloryczne i makroskładniki
+          </h2>
           <FormField
             control={form.control}
             name="caloricIntake"
@@ -171,7 +182,10 @@ export function DietForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Poziom trudności przepisów</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Wybierz poziom trudności" />

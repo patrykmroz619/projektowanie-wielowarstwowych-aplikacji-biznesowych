@@ -2,9 +2,20 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +29,6 @@ import {
   Eye,
   Edit,
   Trash2,
-  Calendar,
   Utensils,
   Dumbbell,
 } from "lucide-react";
@@ -41,7 +51,6 @@ const dietTypeLabels = {
   vegetarian: "Wegetariańska",
   vegan: "Wegańska",
   ketogenic: "Ketogeniczna",
-  lowCarb: "Niskowęglowodanowa",
   highProtein: "Wysokobiałkowa",
 };
 
@@ -78,8 +87,10 @@ export function DietsList(props: IDietListProps) {
 
   // Filtrowanie diet na podstawie wyszukiwania i filtrów
   const filteredDiets = diets.filter((diet) => {
-    const matchesGoal = !filterGoal || filterGoal === "all" || diet.diet_goal === filterGoal;
-    const matchesType = !filterType || filterType === "all" || diet.diet_type === filterType;
+    const matchesGoal =
+      !filterGoal || filterGoal === "all" || diet.diet_goal === filterGoal;
+    const matchesType =
+      !filterType || filterType === "all" || diet.diet_type === filterType;
     return matchesGoal && matchesType;
   });
 
@@ -114,7 +125,9 @@ export function DietsList(props: IDietListProps) {
               <div className="flex items-center">
                 <Filter className="mr-2 h-4 w-4" />
                 <span>
-                  {filterGoal ? goalLabels[filterGoal as keyof typeof goalLabels] : "Cel diety"}
+                  {filterGoal
+                    ? goalLabels[filterGoal as keyof typeof goalLabels]
+                    : "Cel diety"}
                 </span>
               </div>
             </SelectTrigger>
@@ -143,7 +156,6 @@ export function DietsList(props: IDietListProps) {
               <SelectItem value="vegetarian">Wegetariańska</SelectItem>
               <SelectItem value="vegan">Wegańska</SelectItem>
               <SelectItem value="ketogenic">Ketogeniczna</SelectItem>
-              <SelectItem value="lowCarb">Niskowęglowodanowa</SelectItem>
               <SelectItem value="highProtein">Wysokobiałkowa</SelectItem>
             </SelectContent>
           </Select>
@@ -151,84 +163,105 @@ export function DietsList(props: IDietListProps) {
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDiets.length > 0 ? (
-            filteredDiets.map((diet) => (
-              <Card key={diet.id} className="overflow-hidden">
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-start">
-                    {/* TODO: Display diet name instead of ID */}
-                    {/* <CardTitle className="text-xl">{diet.name}</CardTitle> */}
-                    <CardTitle className="text-xl">{diet.id}</CardTitle>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                          <MoreVertical className="h-4 w-4" />
-                          <span className="sr-only">Opcje</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem asChild>
-                          <Link href={`/list/${diet.id}`}>
-                            <Eye className="mr-2 h-4 w-4" />
-                            Wyświetl
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link href="#">
-                            <Edit className="mr-2 h-4 w-4" />
-                            Edytuj
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="text-destructive focus:text-destructive"
-                          onClick={() => handleDeleteDiet(diet.id)}
-                        >
-                          <Trash2 className="mr-2 h-4 w-4" />
-                          Usuń
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </CardHeader>
-                <CardContent className="pb-2">
-                  <div className="flex items-center text-sm text-muted-foreground mb-4">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    {/* TODO: display created at date */}
-                    {/* <span>Utworzono: {formatDate(diet.createdAt)}</span> */}
-                    <span>Utworzono: ---</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="flex flex-col items-center p-3 bg-muted rounded-lg">
-                      <span className="text-xs text-muted-foreground">Kalorie</span>
-                      <span className="text-lg font-bold">
-                        {diet.caloric_intake}
-                        <span className="text-xs">kcal</span>
-                      </span>
+            filteredDiets.map((diet) => {
+              let title = `Dieta ${
+                dietTypeLabels[diet.diet_type as keyof typeof dietTypeLabels]
+              }`;
+
+              try {
+                const generatedJson = JSON.parse(diet.generated_json);
+                if (generatedJson.title) {
+                  title = generatedJson.title;
+                }
+              } catch (error) {
+                console.error("Błąd parsowania JSON:", error);
+              }
+
+              return (
+                <Card key={diet.id} className="overflow-hidden">
+                  <CardHeader className="pb-2">
+                    <div className="flex justify-between items-start">
+                      <CardTitle className="text-xl">{title}</CardTitle>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                          >
+                            <MoreVertical className="h-4 w-4" />
+                            <span className="sr-only">Opcje</span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem asChild>
+                            <Link href={`/list/${diet.id}`}>
+                              <Eye className="mr-2 h-4 w-4" />
+                              Wyświetl
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem asChild>
+                            <Link href="#">
+                              <Edit className="mr-2 h-4 w-4" />
+                              Edytuj
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            className="text-destructive focus:text-destructive"
+                            onClick={() => handleDeleteDiet(diet.id)}
+                          >
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            Usuń
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
-                    <div className="flex flex-col items-center p-3 bg-muted rounded-lg">
-                      <span className="text-xs text-muted-foreground">Posiłki</span>
-                      <span className="text-lg font-bold">{diet.meals_per_day}</span>
+                  </CardHeader>
+                  <CardContent className="pb-2">
+                    <div className="grid grid-cols-2 gap-2 mb-4">
+                      <div className="flex flex-col items-center p-3 bg-muted rounded-lg">
+                        <span className="text-xs text-muted-foreground">
+                          Kalorie
+                        </span>
+                        <span className="text-lg font-bold">
+                          {diet.caloric_intake}
+                          <span className="text-xs">kcal</span>
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-center p-3 bg-muted rounded-lg">
+                        <span className="text-xs text-muted-foreground">
+                          Posiłki
+                        </span>
+                        <span className="text-lg font-bold">
+                          {diet.meals_per_day}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">
-                      <Dumbbell className="mr-1 h-3 w-3" />
-                      {goalLabels[diet.diet_goal as keyof typeof goalLabels]}
-                    </Badge>
-                    <Badge variant="outline">
-                      {dietTypeLabels[diet.diet_type as keyof typeof dietTypeLabels]}
-                    </Badge>
-                  </div>
-                </CardContent>
-                <CardFooter className="pt-2">
-                  <Button variant="secondary" className="w-full" asChild>
-                    <Link href={`/dashboard/list/${diet.id}`}>
-                      <Eye className="mr-2 h-4 w-4" />
-                      Wyświetl dietę
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary">
+                        <Dumbbell className="mr-1 h-3 w-3" />
+                        {goalLabels[diet.diet_goal as keyof typeof goalLabels]}
+                      </Badge>
+                      <Badge variant="outline">
+                        {
+                          dietTypeLabels[
+                            diet.diet_type as keyof typeof dietTypeLabels
+                          ]
+                        }
+                      </Badge>
+                    </div>
+                  </CardContent>
+                  <CardFooter className="pt-2">
+                    <Button variant="secondary" className="w-full" asChild>
+                      <Link href={`/dashboard/list/${diet.id}`}>
+                        <Eye className="mr-2 h-4 w-4" />
+                        Wyświetl dietę
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              );
+            })
           ) : (
             <div className="col-span-full flex flex-col items-center justify-center py-12 text-center">
               <div className="rounded-full bg-muted p-4 mb-4">

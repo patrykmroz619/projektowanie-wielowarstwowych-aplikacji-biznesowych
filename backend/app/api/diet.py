@@ -143,7 +143,7 @@ async def generate_diet_plan(prompt: str) -> str:
         headers["Authorization"] = f"Bearer {OPENAI_API_KEY}"
         url = "https://openrouter.ai/api/v1/chat/completions"
         payload = {
-            "model": "gpt-3.5-turbo",
+            "model": "deepseek/deepseek-chat-v3-0324:free",
             "messages": [
                 {"role": "system", "content": DIET_PLAN_SYSTEM_PROMPT},
                 {"role": "user", "content": prompt}

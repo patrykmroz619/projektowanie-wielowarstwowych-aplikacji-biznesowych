@@ -1,6 +1,6 @@
 import axios from "axios";
 import { DietFormValues } from "../schema/dietSchema";
-import { Diet } from "../types/diet.type";
+import { Diet, DietDetails } from "../types/diet.type";
 
 interface CreateDietResponse {
   id: string;
@@ -11,7 +11,10 @@ const dietApi = axios.create({
 });
 
 export const dietService = {
-  createDiet: async (userId: string, formData: DietFormValues): Promise<CreateDietResponse> => {
+  createDiet: async (
+    userId: string,
+    formData: DietFormValues
+  ): Promise<CreateDietResponse> => {
     const response = await dietApi.post(`/diet/new`, {
       userId,
       ...formData,
@@ -24,7 +27,9 @@ export const dietService = {
     return response.data;
   },
   getDiet: async (dietId: string) => {
-    const response = await dietApi.get<{ data: Diet }>(`/diet/detail/${dietId}`);
+    const response = await dietApi.get<{ data: DietDetails }>(
+      `/diet/detail/${dietId}`
+    );
     return response.data.data;
   },
   getDietList: async (userId: string) => {

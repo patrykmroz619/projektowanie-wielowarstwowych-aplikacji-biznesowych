@@ -32,6 +32,7 @@ class DietListItem(BaseModel):
     diet_type: DietType
     caloric_intake: Optional[float]
     meals_per_day: int
+    generated_json: Any  # JSON z pola generated_json (lub mock)
 
     class Config:
         orm_mode = True 
