@@ -6,6 +6,7 @@ from database.models.profile import UserProfileDB
 from database.database import SessionLocal
 from typing import List
 from app.models.diet import DietListItem, DietDetail
+from app.prompts import DIET_PLAN_SYSTEM_PROMPT
 import json
 from dotenv import load_dotenv
 import os
@@ -39,40 +40,17 @@ def get_user_diets(user_id: str, db: Session = Depends(get_db)):
     diets = db.query(DietPlanDB).filter(DietPlanDB.user_id == user_id).all()
     return diets
 
-# @router.post("/new")
-# def create_diet(data: DietRequest, db: Session = Depends(get_db)):
-#     # Sprawdź, czy użytkownik istnieje
-#     user = db.query(UserProfileDB).filter(UserProfileDB.user_id == data.userId).first()
-#     if not user:
-#         raise HTTPException(status_code=404, detail="User not found")
-
-#     new_diet = DietPlanDB(
-#         user_id=data.userId,
-#         diet_goal=data.dietGoal,
-#         diet_type=data.dietType,
-#         caloric_intake=data.caloricIntake,
-#         meals_per_day=data.mealsPerDay,
-#         generated_json=None  # pusty na razie
-#     )
-#     db.add(new_diet)
-#     db.commit()
-#     db.refresh(new_diet)
-#     return {"id": new_diet.id, "message": "Diet created!"}
-
 @router.post("/new")
 async def create_diet(data: DietRequest, db: Session = Depends(get_db)):
     user = db.query(UserProfileDB).filter(UserProfileDB.user_id == data.userId).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     age = calculate_age(user.dob)
 
     # Construct a prompt
     prompt = f"""
-    Return a diet plan in strict JSON format using this data:
-
     {{
-    "user": {{
         "gender": "{user.gender}",
         "age": {age},
         "weight": {user.weight},
@@ -81,21 +59,7 @@ async def create_diet(data: DietRequest, db: Session = Depends(get_db)):
         "goal": "{data.dietGoal}",
         "dietType": "{data.dietType}",
         "mealsPerDay": {data.mealsPerDay}
-    }},
-    "format": {{
-        "title": string,
-        "summary": {{
-        "calories": int,
-        "protein": int,
-        "carbs": int,
-        "fat": int,
-        "meals": int
-        }},
-        "meals": [{{...}}]  // detailed meal objects
     }}
-    }}
-
-    Make sure the output is only valid JSON with no extra explanation or comments.
     """
 
     # Get JSON from selected model
@@ -169,7 +133,7 @@ def get_diet_detail(diet_id: str, db: Session = Depends(get_db)):
     else:
         # Jeśli nie ma jeszcze wygenerowanego planu → zwróć przykładowy
         return {"data": EXAMPLE_DIET_JSON}
-    
+
 async def generate_diet_plan(prompt: str) -> str:
     headers = {
         "Content-Type": "application/json",
@@ -177,11 +141,11 @@ async def generate_diet_plan(prompt: str) -> str:
 
     if model == "openai":
         headers["Authorization"] = f"Bearer {OPENAI_API_KEY}"
-        url = "https://api.openai.com/v1/chat/completions"
+        url = "https://openrouter.ai/api/v1/chat/completions"
         payload = {
             "model": "gpt-3.5-turbo",
             "messages": [
-                {"role": "system", "content": "You're a diet assistant. Return a JSON-formatted diet plan."},
+                {"role": "system", "content": DIET_PLAN_SYSTEM_PROMPT},
                 {"role": "user", "content": prompt}
             ],
             "temperature": 0.7

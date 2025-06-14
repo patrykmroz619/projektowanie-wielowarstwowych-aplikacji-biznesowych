@@ -155,7 +155,7 @@ export function DietDetails(props: IDietDetailsProps) {
   // TODO: Replace sample diet with diet from API when backend will be ready
   const { diet: dietFromApi } = props;
   console.log("Dieta z API:", dietFromApi);
-  const diet = sampleDiet;
+  const diet = dietFromApi as unknown as typeof sampleDiet;
 
   const handlePrint = () => {
     window.print();
